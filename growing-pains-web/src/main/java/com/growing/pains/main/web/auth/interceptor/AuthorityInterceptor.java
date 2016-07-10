@@ -1,8 +1,12 @@
 package com.growing.pains.main.web.auth.interceptor;
 
 import com.google.common.collect.Lists;
+import com.growing.pains.main.web.auth.context.PermissionContext;
+import com.growing.pains.main.web.auth.context.PermissionContextKey;
 import com.growing.pains.main.web.auth.flow.*;
+import com.growing.pains.model.entity.system.UserEntity;
 import com.growing.pains.service.system.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -15,7 +19,9 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 /**
  * @author: miaoxing
@@ -66,10 +72,27 @@ public class AuthorityInterceptor implements HandlerInterceptor {
         }
 
         if (authResult.getSuccess() == null || authResult.getSuccess()) {
+            // 初始化Session
+            initSessionInContext(authResult.getUser());
             return true;
         }
         response.sendRedirect("/system/login");
         return false;
+    }
+
+    /**
+     * 初始化session信息
+     *
+     * @param user
+     */
+    private void initSessionInContext(final UserEntity user) {
+        if (user == null) {
+            return;
+        }
+        // 初始化Context
+        PermissionContext.putCurrent(PermissionContextKey.CURRENT_USER, user);
+
+        // 后续可根据业务增加其他权限Context
     }
 
     @Override
