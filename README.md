@@ -1,2 +1,2 @@
 # GrowingPains
-to show the growing pains
+渴望成长
