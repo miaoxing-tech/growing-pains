@@ -1,4 +1,4 @@
-package com.growing.pains.model.entity.system;
+package com.growing.pains.model.entity.blog;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -6,12 +6,12 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import java.util.Date;
 
 /**
- * 用户实体类
+ * 博客评论实体类
  *
  * @author: miaoxing
- * DATE:    16/7/4
+ * DATE:    16/7/11
  */
-public class UserEntity {
+public class BlogCommentEntity {
 
     /**
      * 主键
@@ -19,30 +19,24 @@ public class UserEntity {
     private int id;
 
     /**
-     * 用户名
+     * 评论内容
+     */
+    private String content;
+
+    /**
+     * 评论人
      */
     private String userName;
 
     /**
-     * 密码
+     * 博客博文id
      */
-    private String password;
+    private int blogContentId;
 
     /**
      * 创建时间
      */
     private Date createTime;
-
-    /**
-     * 更新时间
-     */
-    private Date updateTime;
-
-    public static UserEntity getGuest() {
-        UserEntity userEntity = new UserEntity();
-        userEntity.setUserName("游客");
-        return userEntity;
-    }
 
     public int getId() {
         return id;
@@ -50,6 +44,14 @@ public class UserEntity {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getUserName() {
@@ -60,12 +62,12 @@ public class UserEntity {
         this.userName = userName;
     }
 
-    public String getPassword() {
-        return password;
+    public int getBlogContentId() {
+        return blogContentId;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setBlogContentId(int blogContentId) {
+        this.blogContentId = blogContentId;
     }
 
     public Date getCreateTime() {
@@ -74,14 +76,6 @@ public class UserEntity {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
     }
 
     @Override

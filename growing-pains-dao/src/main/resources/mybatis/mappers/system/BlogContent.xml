@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.growing.pains.dao.blog.BlogContentDao">
+
+    <insert id="insert" parameterType="com.growing.pains.model.entity.blog.BlogContentEntity"
+            useGeneratedKeys="true" keyProperty="entity.id">
+        INSERT INTO `blog_content`
+        (
+        `title`,
+        `content`,
+        <if test="entity.createTime != null">
+            `create_time`,
+        </if>
+        <if test="entity.updateTime != null">
+            `update_time`,
+        </if>
+        `user_id`
+        )
+        VALUES
+        (
+        #{entity.title},
+        #{entity.content},
+        <if test="entity.createTime != null">
+            #{entity.createTime},
+        </if>
+        <if test="entity.updateTime != null">
+            #{entity.updateTime},
+        </if>
+        #{entity.userId}
+        )
+    </insert>
+
+    <update id="update">
+        UPDATE `blog_content`
+        SET
+        <if test="entity.title != null">
+            `title` = #{entity.title},
+        </if>
+        <if test="entity.content != null">
+            `content` = #{entity.content},
+        </if>
+        `update_time` = #{entity.updateTime}
+        WHERE
+        `id` = #{entity.id}
+    </update>
+
+</mapper>

@@ -2,6 +2,8 @@ package com.growing.pains.main.web.handler;
 
 import com.growing.pains.common.exception.BusinessException;
 import com.growing.pains.common.result.ApiResult;
+import com.growing.pains.main.web.auth.context.SessionContext;
+import com.growing.pains.model.entity.system.UserEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.TypeMismatchException;
@@ -57,22 +59,21 @@ public class GlobalExceptionHandler implements HandlerExceptionResolver, Ordered
             modelView.addObject("ex", ex);
         }
 
-        //TODO 搞一套上下文存储当前用户信息,用以鉴权
-        /*// 获取用户Id
+        // 获取用户Id
         UserEntity currentUser = SessionContext.getCurrentUser();
-        String userName = currentUser == null ? "<null>" : currentUser.getUserName();*/ //区分业务异常
+        String userName = currentUser == null ? "<null>" : currentUser.getUserName(); //区分业务异常
 
         // 区分业务异常 和 其他未捕获异常
         if (ex instanceof BusinessException) {
             // 处理业务异常
-            LOGGER.error("业务异常:{}, 操作人:{}", ex.getMessage(), "userName,暂时为空", ex);
+            LOGGER.error("业务异常:{}, 操作人:{}", ex.getMessage(), userName, ex);
         } else if (ex instanceof MissingServletRequestParameterException || ex instanceof TypeMismatchException) {
             // 参数错误
             modelView.addObject("message", "参数错误");
             LOGGER.error("http参数异常:{}", ex.getMessage(), ex);
         } else {
             // 处理其他未捕获异常
-            LOGGER.error("其他未捕获异常:{}, 操作人:{}", ex.getMessage(), "userName,暂时为空", ex);
+            LOGGER.error("其他未捕获异常:{}, 操作人:{}", ex.getMessage(), userName, ex);
         }
 
         return modelView;

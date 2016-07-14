@@ -29,7 +29,7 @@ public class PermissionContext {
     private static ContextHolder<PermissionContextKey> getCurrent() {
         ContextHolder<PermissionContextKey> contextHolder = CURRENT_CONTEXT.get();
         if (contextHolder == null) {
-            CURRENT_CONTEXT.set(new ContextHolder<>());
+            CURRENT_CONTEXT.set(contextHolder = new ContextHolder<>());
         }
         return contextHolder;
     }

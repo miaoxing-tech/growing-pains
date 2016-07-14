@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.growing.pains.dao.blog.BlogTagDao">
+
+    <insert id="insert" parameterType="com.growing.pains.model.entity.blog.BlogTagEntity"
+            useGeneratedKeys="true" keyProperty="entity.id">
+        INSERT INTO `blog_tag`
+        (
+        `name`,
+        `desc`,
+        <if test="entity.createTime != null">
+            `create_time`,
+        </if>
+        <if test="entity.updateTime != null">
+            `update_time`,
+        </if>
+        `user_id`
+        )
+        VALUES
+        (
+        #{entity.name},
+        #{entity.desc},
+        <if test="entity.createTime != null">
+            #{entity.createTime},
+        </if>
+        <if test="entity.updateTime != null">
+            #{entity.updateTime},
+        </if>
+        #{entity.userId}
+        )
+    </insert>
+
+    <update id="update">
+        UPDATE `blog_tag`
+        SET
+        <if test="entity.name != null">
+            `name` = #{entity.name},
+        </if>
+        <if test="entity.desc != null">
+            `desc` = #{entity.desc},
+        </if>
+        `update_time` = #{entity.updateTime}
+        WHERE
+        `id` = #{entity.id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM `blog_tag`
+        <where>
+            `id` = #{id}
+        </where>
+    </delete>
+
+</mapper>

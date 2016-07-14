@@ -1,4 +1,4 @@
-package com.growing.pains.model.entity.system;
+package com.growing.pains.model.entity.blog;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -6,12 +6,12 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import java.util.Date;
 
 /**
- * 用户实体类
+ * 博客标签实体类
  *
  * @author: miaoxing
- * DATE:    16/7/4
+ * DATE:    16/7/11
  */
-public class UserEntity {
+public class BlogTagEntity {
 
     /**
      * 主键
@@ -19,14 +19,19 @@ public class UserEntity {
     private int id;
 
     /**
-     * 用户名
+     * 标签内容
      */
-    private String userName;
+    private String name;
 
     /**
-     * 密码
+     * 标签描述
      */
-    private String password;
+    private String desc;
+
+    /**
+     * 博客所属用户id
+     */
+    private int userId;
 
     /**
      * 创建时间
@@ -38,12 +43,6 @@ public class UserEntity {
      */
     private Date updateTime;
 
-    public static UserEntity getGuest() {
-        UserEntity userEntity = new UserEntity();
-        userEntity.setUserName("游客");
-        return userEntity;
-    }
-
     public int getId() {
         return id;
     }
@@ -52,20 +51,28 @@ public class UserEntity {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPassword() {
-        return password;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public Date getCreateTime() {

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.growing.pains.dao.blog.BlogContentTagDao">
+
+    <resultMap id="blogContentTagMap" type="com.growing.pains.model.entity.blog.BlogContentTagEntity">
+        <result column="blog_tag_id" property="blogTagId"/>
+        <result column="blog_content_id" property="blogContentId"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <sql id="blogContentTagField">
+        `id`,
+        `blog_tag_id`,
+        `blog_content_id`,
+        `create_time`
+    </sql>
+
+    <insert id="insert" parameterType="com.growing.pains.model.entity.blog.BlogContentTagEntity">
+        INSERT INTO `blog_content_tag`
+        (
+        `blog_tag_id`,
+        `blog_content_id`
+        )
+        VALUES
+        (
+        #{blogTagId},
+        #{blogContentId}
+        )
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM `blog_content_tag`
+        <where>
+            <foreach collection="blogContentTagEntities" item="item" open="" separator="OR" close="">
+                (
+                `blog_tag_id` = #{item.blogTagId}
+                AND `blog_content_id` = #{item.blogContentId}
+                )
+            </foreach>
+        </where>
+    </delete>
+
+    <select id="queryByContentId" resultMap="blogContentTagMap">
+        SELECT
+        <include refid="blogContentTagField"/>
+        FROM `blog_content_tag`
+        WHERE `blog_content_id` = #{blogContentId}
+    </select>
+</mapper>
