@@ -5,6 +5,8 @@ import com.google.common.base.Preconditions;
 import com.growing.pains.common.result.ApiResult;
 import com.growing.pains.common.utils.MD5Util;
 import com.growing.pains.main.utils.UserCookieUtil;
+import com.growing.pains.main.web.auth.annotation.Auth;
+import com.growing.pains.main.web.auth.annotation.Authority;
 import com.growing.pains.model.entity.system.UserEntity;
 import com.growing.pains.service.system.UserService;
 import org.apache.commons.lang3.StringUtils;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -28,7 +31,8 @@ public class SystemController {
     @Resource
     private UserService userService;
 
-    @RequestMapping(value = "login", method = RequestMethod.POST)
+    @Authority(Auth.PUBLIC)
+    @RequestMapping(value = "login")
     @ResponseBody
     public ApiResult login(@RequestParam("userName") String userName,
                            @RequestParam("password") String password,
@@ -42,5 +46,18 @@ public class SystemController {
 
         UserCookieUtil.saveUserCookie(userName, response);
         return ApiResult.succ();
+    }
+
+    @RequestMapping(value = "logout", method = RequestMethod.POST)
+    @ResponseBody
+    public ApiResult logout(HttpServletResponse response) {
+        UserCookieUtil.deleteUserCookie(response);
+        return ApiResult.succ();
+    }
+
+    @Authority(Auth.PUBLIC)
+    @RequestMapping(value = "authError", method = RequestMethod.GET)
+    public ModelAndView authError() {
+        return new ModelAndView("error/authError");
     }
 }

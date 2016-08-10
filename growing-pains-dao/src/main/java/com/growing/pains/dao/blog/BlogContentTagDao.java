@@ -19,4 +19,6 @@ public interface BlogContentTagDao {
 
     List<BlogContentTagEntity> queryByContentId(@Param("blogContentId") int blogContentId);
 
+    int countByTagId(@Param("tagId") int tagId);
+
 }

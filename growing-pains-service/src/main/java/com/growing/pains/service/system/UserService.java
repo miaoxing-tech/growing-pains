@@ -23,4 +23,13 @@ public class UserService {
         return userDao.selectByUserName(userName);
     }
 
+    public UserEntity queryUserByUserId(int userId) {
+        Preconditions.checkArgument(userId > 0, "用户id不合法");
+        return userDao.selectById(userId);
+    }
+
+    public int countTotalUser() {
+        return userDao.countUser();
+    }
+
 }

@@ -3,6 +3,7 @@ package com.growing.pains.main.web.auth.interceptor;
 import com.google.common.collect.Lists;
 import com.growing.pains.main.web.auth.context.PermissionContext;
 import com.growing.pains.main.web.auth.context.PermissionContextKey;
+import com.growing.pains.main.web.auth.context.SessionContext;
 import com.growing.pains.main.web.auth.flow.*;
 import com.growing.pains.model.entity.system.UserEntity;
 import com.growing.pains.service.system.UserService;
@@ -73,7 +74,7 @@ public class AuthorityInterceptor implements HandlerInterceptor {
             initSessionInContext(authResult.getUser());
             return true;
         }
-        response.sendRedirect("/system/login");
+        request.getRequestDispatcher("/system/authError.htm").forward(request, response);
         return false;
     }
 
@@ -95,6 +96,14 @@ public class AuthorityInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
                            ModelAndView modelAndView) throws Exception {
+        if (modelAndView != null) {
+            modelAndView.addObject("username", SessionContext.getCurrentUser().getUserName());
+            if (SessionContext.getCurrentUser().getId() > 0) {
+                modelAndView.addObject("isLogin", true);
+            } else {
+                modelAndView.addObject("isLogin", false);
+            }
+        }
     }
 
     @Override

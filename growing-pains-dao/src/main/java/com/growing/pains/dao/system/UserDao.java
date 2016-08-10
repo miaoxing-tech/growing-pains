@@ -11,4 +11,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserDao {
     UserEntity selectByUserName(@Param("userName") String userName);
+
+    UserEntity selectById(@Param("id") int userId);
+
+    int countUser();
 }

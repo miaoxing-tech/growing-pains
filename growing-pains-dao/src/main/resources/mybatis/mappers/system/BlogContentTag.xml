@@ -23,8 +23,8 @@
         )
         VALUES
         (
-        #{blogTagId},
-        #{blogContentId}
+        #{entity.blogTagId},
+        #{entity.blogContentId}
         )
     </insert>
 
@@ -45,5 +45,12 @@
         <include refid="blogContentTagField"/>
         FROM `blog_content_tag`
         WHERE `blog_content_id` = #{blogContentId}
+    </select>
+
+    <select id="countByTagId" resultType="java.lang.Integer">
+        SELECT
+        COUNT(*)
+        FROM `blog_content_tag`
+        WHERE `blog_tag_id` = #{tagId}
     </select>
 </mapper>

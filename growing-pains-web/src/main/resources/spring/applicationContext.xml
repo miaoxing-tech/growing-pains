@@ -16,6 +16,8 @@
                                           com.growing.pains.service,
                                           com.growing.pains.main.web.controller"/>
 
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+
     <mvc:annotation-driven>
         <mvc:message-converters register-defaults="true">
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">

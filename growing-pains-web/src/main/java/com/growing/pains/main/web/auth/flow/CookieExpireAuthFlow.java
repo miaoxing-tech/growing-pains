@@ -29,7 +29,8 @@ public class CookieExpireAuthFlow implements HttpAuthFlow {
                 UserCookieUtil.deleteUserCookie(response);
                 authResult.setSuccess(false);
             }
-
+        } else {
+            authResult.setSuccess(false);
         }
         return authResult;
     }

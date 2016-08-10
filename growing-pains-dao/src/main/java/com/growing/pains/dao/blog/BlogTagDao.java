@@ -1,8 +1,11 @@
 package com.growing.pains.dao.blog;
 
 import com.growing.pains.model.entity.blog.BlogTagEntity;
+import com.growing.pains.model.param.BlogTagParam;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @author: miaoxing
@@ -15,6 +18,12 @@ public interface BlogTagDao {
 
     int update(@Param("entity") BlogTagEntity entity);
 
-    void delete(@Param("id") int tagId);
+    void delete(@Param("tagIds") List<Integer> tagIds);
+
+    List<BlogTagEntity> queryPageByParam(@Param("param") BlogTagParam param);
+
+    List<BlogTagEntity> queryByParam(@Param("param") BlogTagParam param);
+
+    int countByParam(@Param("param") BlogTagParam param);
 
 }

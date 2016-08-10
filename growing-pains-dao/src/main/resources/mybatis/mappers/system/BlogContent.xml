@@ -2,6 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.growing.pains.dao.blog.BlogContentDao">
 
+    <resultMap id="blogMap" type="com.growing.pains.model.entity.blog.BlogContentEntity">
+        <result column="user_id" property="userId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <sql id="blogField">
+        `id`,
+        `title`,
+        `content`,
+        `user_id`,
+        `create_time`,
+        `update_time`,
+        `state`
+    </sql>
+
     <insert id="insert" parameterType="com.growing.pains.model.entity.blog.BlogContentEntity"
             useGeneratedKeys="true" keyProperty="entity.id">
         INSERT INTO `blog_content`
@@ -44,4 +60,90 @@
         `id` = #{entity.id}
     </update>
 
+    <update id="updateState">
+        UPDATE `blog_content`
+        SET
+        `state` = #{state}
+        WHERE
+        `id` = #{id}
+        AND `user_id` = #{userId}
+    </update>
+
+    <select id="queryPageByParam" parameterType="com.growing.pains.model.param.BlogParam" resultMap="blogMap">
+        SELECT
+        `id`,
+        `title`,
+        `user_id`,
+        `create_time`,
+        `update_time`
+        FROM `blog_content`
+        <where>
+            `state` = 1
+            <if test="param.title != null and param.title != ''">
+                AND `title` LIKE CONCAT("%", #{param.title}, "%")
+            </if>
+            <if test="param.userId != null and param.userId != ''">
+                AND `user_id` = #{param.userId}
+            </if>
+        </where>
+        order by id desc
+    </select>
+
+    <select id="queryByParam" parameterType="com.growing.pains.model.param.BlogParam" resultMap="blogMap">
+        SELECT
+        <include refid="blogField"/>
+        FROM `blog_content`
+        <where>
+            `state` = 1
+            <if test="param.id != null and param.id != ''">
+                AND `id` = #{param.id}
+            </if>
+            <if test="param.title != null and param.title != ''">
+                AND `title` = #{param.title}
+            </if>
+            <if test="param.userId != null and param.userId != ''">
+                AND `user_id` = #{param.userId}
+            </if>
+        </where>
+        order by id desc
+    </select>
+
+    <select id="countBlog" resultType="java.lang.Integer">
+        SELECT
+        COUNT(*)
+        FROM `blog_content`
+        <where>
+        `state` = 1
+        </where>
+    </select>
+
+    <select id="selectLastBlog" resultMap="blogMap">
+        SELECT
+        `id`,
+        `title`,
+        `user_id`,
+        `create_time`,
+        `update_time`
+        FROM `blog_content`
+        <where>
+            `state` = 1
+        </where>
+        order by id desc
+        LIMIT 1
+    </select>
+
+    <select id="selectNewest" resultMap="blogMap">
+        SELECT
+        `id`,
+        `title`,
+        `user_id`,
+        `create_time`,
+        `update_time`
+        FROM `blog_content`
+        <where>
+            `state` = 1
+        </where>
+        order by id desc
+        LIMIT #{size}
+    </select>
 </mapper>

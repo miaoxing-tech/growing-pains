@@ -15,4 +15,17 @@
         from admin_user u
         where u.user_name = #{userName}
     </select>
+
+    <select id="selectById" resultType="com.growing.pains.model.entity.system.UserEntity">
+        select
+        <include refid="basicFields"/>
+        from admin_user u
+        where u.id = #{id}
+    </select>
+
+    <select id="countUser" resultType="java.lang.Integer">
+        SELECT
+        COUNT(*)
+        FROM `admin_user`
+    </select>
 </mapper>

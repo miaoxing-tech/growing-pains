@@ -42,7 +42,7 @@ public class ApiResult<T> implements Serializable {
      * @param list  数据列表
      * @return
      */
-    public static <E> ApiResult buildPagination(int total, List<E> list) {
+    public static <E> ApiResult buildPagination(long total, List<E> list) {
         Map<String, Object> pagination = Maps.newHashMap();
         pagination.put("total", total);
         pagination.put("list", list);
@@ -57,7 +57,7 @@ public class ApiResult<T> implements Serializable {
      * @param list   数据列表
      * @return
      */
-    public static <E> ApiResult buildPagination(int status, int total, List<E> list) {
+    public static <E> ApiResult buildPagination(int status, long total, List<E> list) {
         Map<String, Object> pagination = Maps.newHashMap();
         pagination.put("total", total);
         pagination.put("list", list);
@@ -72,7 +72,7 @@ public class ApiResult<T> implements Serializable {
      * @param list    数据列表
      * @return
      */
-    public static <E> ApiResult buildPagination(String message, int total, List<E> list) {
+    public static <E> ApiResult buildPagination(String message, long total, List<E> list) {
         Map<String, Object> pagination = Maps.newHashMap();
         pagination.put("total", total);
         pagination.put("list", list);

@@ -2,6 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.growing.pains.dao.blog.BlogTagDao">
 
+    <resultMap id="blogTagMap" type="com.growing.pains.model.entity.blog.BlogTagEntity">
+        <result column="user_id" property="userId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <sql id="blogTagField">
+        `id`,
+        `name`,
+        `desc`,
+        `user_id`,
+        `create_time`,
+        `update_time`
+    </sql>
+
     <insert id="insert" parameterType="com.growing.pains.model.entity.blog.BlogTagEntity"
             useGeneratedKeys="true" keyProperty="entity.id">
         INSERT INTO `blog_tag`
@@ -47,8 +62,61 @@
     <delete id="delete">
         DELETE FROM `blog_tag`
         <where>
-            `id` = #{id}
+            `id` IN
+            <foreach collection="tagIds" item="item" index="index"
+                     open="(" separator="," close=")">
+                #{item}
+            </foreach>
         </where>
     </delete>
 
+    <select id="queryPageByParam" parameterType="com.growing.pains.model.param.BlogTagParam" resultMap="blogTagMap">
+        SELECT
+        <include refid="blogTagField"/>
+        FROM `blog_tag`
+        <where>
+            <if test="param.name != null and param.name != ''">
+                AND `name` LIKE CONCAT("%", #{param.name}, "%")
+            </if>
+            <if test="param.userId != null and param.userId != ''">
+                AND `user_id` = #{param.userId}
+            </if>
+        </where>
+        order by id desc
+    </select>
+
+    <select id="queryByParam" parameterType="com.growing.pains.model.param.BlogTagParam" resultMap="blogTagMap">
+        SELECT
+        <include refid="blogTagField"/>
+        FROM `blog_tag`
+        <where>
+            <if test="param.id != null and param.id != ''">
+                AND `id` = #{param.id}
+            </if>
+            <if test="param.name != null and param.name != ''">
+                AND `name` = #{param.name}
+            </if>
+            <if test="param.userId != null and param.userId != ''">
+                AND `user_id` = #{param.userId}
+            </if>
+        </where>
+        order by id desc
+    </select>
+
+    <select id="countByParam" parameterType="com.growing.pains.model.param.BlogTagParam" resultType="java.lang.Integer">
+        SELECT
+        count(*)
+        FROM `blog_tag`
+        <where>
+            <if test="param.id != null and param.id != ''">
+                AND `id` = #{param.id}
+            </if>
+            <if test="param.name != null and param.name != ''">
+                AND `name` = #{param.name}
+            </if>
+            <if test="param.userId != null and param.userId != ''">
+                AND `user_id` = #{param.userId}
+            </if>
+        </where>
+    </select>
 </mapper>

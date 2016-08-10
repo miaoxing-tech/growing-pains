@@ -43,6 +43,11 @@ public class BlogTagEntity {
      */
     private Date updateTime;
 
+    /**
+     * 博客状态：1.有效, 0.失效
+     */
+    private int state;
+
     public int getId() {
         return id;
     }
@@ -89,6 +94,14 @@ public class BlogTagEntity {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 
     @Override
