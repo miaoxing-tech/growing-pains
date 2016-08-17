@@ -35,6 +35,7 @@ public class PublicAuthFlow implements HttpAuthFlow {
         Authority authority = method.getAnnotation(Authority.class);
         if (authority != null && authority.value() == Auth.PUBLIC) {
             if (authority.IPLimit()) { // 后台功能, 限制ip
+                logger.info("本功能限制ip, request:{}, 访问ip:{}", request.getRequestURI(), request.getRemoteAddr());
                 authResult.setSuccess(isIpAllowed(request.getRemoteAddr()));
             } else { // 公共功能, 不限制ip
                 authResult.setSuccess(true);
