@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.growing.pains.dao.system.InvitationCodeDao">
+    <resultMap id="invitationCodeMap" type="com.growing.pains.model.entity.system.InvitationCodeEntity">
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <sql id="basicFields">
+        `id`,
+        `code`,
+        `state`,
+        `create_time`,
+        `update_time`
+    </sql>
+
+    <insert id="insert" parameterType="com.growing.pains.model.entity.system.InvitationCodeEntity"
+            useGeneratedKeys="true" keyProperty="entity.id">
+        INSERT INTO `invitation_code`
+        (
+        `code`
+        )
+        VALUES
+        (
+        #{entity.code}
+        )
+    </insert>
+
+    <update id="updateState">
+        UPDATE `invitation_code`
+        SET
+        `state` = #{state}
+        WHERE
+        `id` = #{id}
+    </update>
+
+    <select id="selectByCode" resultMap="invitationCodeMap">
+        select
+        <include refid="basicFields"/>
+        from `invitation_code`
+        where code = #{code}
+    </select>
+</mapper>

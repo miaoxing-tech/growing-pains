@@ -8,6 +8,7 @@ import com.growing.pains.main.utils.UserCookieUtil;
 import com.growing.pains.main.web.auth.annotation.Auth;
 import com.growing.pains.main.web.auth.annotation.Authority;
 import com.growing.pains.model.entity.system.UserEntity;
+import com.growing.pains.service.system.InvitationCodeService;
 import com.growing.pains.service.system.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,9 @@ public class SystemController {
 
     @Resource
     private UserService userService;
+
+    @Resource
+    private InvitationCodeService invitationCodeService;
 
     @Authority(Auth.PUBLIC)
     @RequestMapping(value = "login")
@@ -59,5 +63,26 @@ public class SystemController {
     @RequestMapping(value = "authError", method = RequestMethod.GET)
     public ModelAndView authError() {
         return new ModelAndView("error/authError");
+    }
+
+    @Authority(value = Auth.PUBLIC, IPLimit = true)
+    @RequestMapping(value = "addInvitationCode", method = RequestMethod.POST)
+    @ResponseBody
+    public ApiResult addInvitationCode() {
+        invitationCodeService.addInvitationCode();
+        return ApiResult.succ();
+    }
+
+    @Authority(Auth.PUBLIC)
+    @RequestMapping(value = "register", method = RequestMethod.POST)
+    @ResponseBody
+    public ApiResult register(@RequestParam("userName") String userName,
+                              @RequestParam("password") String password,
+                              @RequestParam("invitationCode") String invitationCode) {
+        Preconditions.checkArgument(StringUtils.isNotBlank(userName), "用户名不能为空");
+        Preconditions.checkArgument(StringUtils.isNotBlank(password), "密码不能为空");
+
+        userService.register(userName, password, invitationCode);
+        return ApiResult.succ();
     }
 }

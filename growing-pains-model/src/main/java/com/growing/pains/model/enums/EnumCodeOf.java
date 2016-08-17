@@ -1,6 +1,3 @@
-/*
- * $Id$ Copyright (c) 2012 Qunar.com. All Rights Reserved.
- */
 package com.growing.pains.model.enums;
 
 import org.apache.commons.lang3.ArrayUtils;

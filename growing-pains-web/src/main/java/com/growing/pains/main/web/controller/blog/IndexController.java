@@ -32,14 +32,13 @@ public class IndexController {
         String lastTime;
         BlogContentEntity lastBlog = blogService.getLastBlog();
         if (lastBlog != null) {
-            lastTime = DateFormatUtils.format(blogService.getLastBlog().getCreateTime(), "yyyy-MM-dd");
+            lastTime = DateFormatUtils.format(blogService.getLastBlog().getCreateTime(), "yyyy-MM-dd HH:mm:SS");
         } else {
             lastTime = "0000-00-00";
         }
 
         return new ModelAndView("blog/index")
                 .addObject("blogTotal", blogService.countTotalBlog())
-                .addObject("lastTime", lastTime)
-                .addObject("userTotal", userService.countTotalUser());
+                .addObject("lastTime", lastTime);
     }
 }

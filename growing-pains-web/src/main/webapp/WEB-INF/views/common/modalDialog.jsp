@@ -8,6 +8,9 @@
             </div>
             <div class="modal-body" id="basic-modal-body">
             </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn default">Close</button>
+            </div>
         </div>
         <!-- /.modal-content -->
     </div>

@@ -25,7 +25,7 @@
                             <div class="form-group col-md-12"></div>
                             <div class="form-group col-md-12">
                                 <div class="col-md-1"></div>
-                                <label class="control-label col-md-2">密&nbsp;&nbsp;&nbsp;码</label>
+                                <label class="control-label col-md-2">密&nbsp;&nbsp;&nbsp;&nbsp;码</label>
                                 <div class="col-md-8">
                                     <input type="password" id="password" class="form-control maxlength-handler"
                                            name="password" maxlength="100" placeholder="">
@@ -38,6 +38,65 @@
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn default">Close</button>
                     <button type="button" class="btn green" onclick="systemManager.login();">Login</button>
+                    <button type="button" class="btn blue" onclick="systemManager.registerPage();">Register</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="registerModal" class="modal fade" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">REGISTER</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="scroller" style="height:300px" data-always-visible="1" data-rail-visible1="1">
+                        <div class="row">
+                            <div class="form-group col-md-12"></div>
+                            <div class="form-group col-md-12" id="registerError"></div>
+                            <div class="form-group col-md-12">
+                                <div class="col-md-1"></div>
+                                <label class="control-label col-md-2">用&nbsp;&nbsp;户&nbsp;&nbsp;名</label>
+                                <div class="col-md-8">
+                                    <input type="text" id="registerUserName" class="form-control maxlength-handler"
+                                           name="registerUserName" maxlength="100" placeholder="">
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <div class="col-md-1"></div>
+                                <label class="control-label col-md-2">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</label>
+                                <div class="col-md-8">
+                                    <input type="password" id="registerPassword" class="form-control maxlength-handler"
+                                           name="registerPassword" maxlength="100" placeholder="">
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <div class="col-md-1"></div>
+                                <label class="control-label col-md-2">密码确认</label>
+                                <div class="col-md-8">
+                                    <input type="password" id="registerPasswordAgain" class="form-control maxlength-handler"
+                                           name="registerPasswordAgain" maxlength="100" placeholder="">
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <div class="col-md-1"></div>
+                                <label class="control-label col-md-2">邀&nbsp;&nbsp;请&nbsp;&nbsp;码</label>
+                                <div class="col-md-8">
+                                    <input type="text" id="invitationCode" class="form-control maxlength-handler"
+                                           name="invitationCode" maxlength="100" placeholder="">
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn default">Close</button>
+                    <button type="button" class="btn green" onclick="systemManager.register();">Register</button>
                 </div>
             </div>
         </div>
@@ -121,6 +180,8 @@
                                 <c:if test="${isLogin == false}">
                                     <a href="#" onclick="$('#loginModal').modal('show');">
                                         <i class="icon-user"></i>登录</a>
+                                    <a href="#" onclick="systemManager.registerPage();">
+                                        <i class="icon-user"></i>注册</a>
                                 </c:if>
                             </li>
                         </ul>

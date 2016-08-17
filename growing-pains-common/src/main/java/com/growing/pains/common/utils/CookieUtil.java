@@ -24,7 +24,7 @@ public class CookieUtil {
 
     public static void saveCookie(String key, String value, HttpServletResponse response) {
         Cookie cookie = new Cookie(key, value);
-        cookie.setMaxAge((int) TimeUnit.DAYS.toSeconds(COOKIE_MAX_AGE));// 设置cookie的保存时间3天
+        cookie.setMaxAge((int) TimeUnit.DAYS.toSeconds(COOKIE_MAX_AGE));// 设置cookie的保存时间5天
         cookie.setPath(PATH_COOKIE);
         response.addCookie(cookie);
         logger.info("写入cookie，key = {}, value = {}", key, value);
@@ -32,7 +32,7 @@ public class CookieUtil {
 
     public static void deleteCookie(String key, HttpServletResponse response) {
         Cookie cookie = new Cookie(key, null);
-        cookie.setMaxAge(0);// 设置cookie的保存时间3天
+        cookie.setMaxAge(0);
         cookie.setPath(PATH_COOKIE);
         response.addCookie(cookie);
         logger.info("删除cookie成功, key = {}", key);

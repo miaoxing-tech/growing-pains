@@ -15,4 +15,6 @@ public interface UserDao {
     UserEntity selectById(@Param("id") int userId);
 
     int countUser();
+
+    int insert(@Param("entity") UserEntity entity);
 }

@@ -2,12 +2,14 @@ package com.growing.pains.main.web.handler;
 
 import com.growing.pains.common.exception.BusinessException;
 import com.growing.pains.common.result.ApiResult;
+import com.growing.pains.common.utils.JsonUtil;
 import com.growing.pains.main.web.auth.context.SessionContext;
 import com.growing.pains.model.entity.system.UserEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.core.Ordered;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
@@ -74,6 +76,10 @@ public class GlobalExceptionHandler implements HandlerExceptionResolver, Ordered
         } else {
             // 处理其他未捕获异常
             LOGGER.error("其他未捕获异常:{}, 操作人:{}", ex.getMessage(), userName, ex);
+        }
+
+        if (!CollectionUtils.isEmpty(request.getParameterMap())) {
+            LOGGER.error("传入参数:{}", JsonUtil.encodeQuietly(request.getParameterMap()));
         }
 
         return modelView;

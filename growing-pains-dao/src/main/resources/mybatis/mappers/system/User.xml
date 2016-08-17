@@ -9,6 +9,20 @@
         u.update_time as updateTime
     </sql>
 
+    <insert id="insert" parameterType="com.growing.pains.model.entity.system.UserEntity"
+            useGeneratedKeys="true" keyProperty="entity.id">
+        INSERT INTO `admin_user`
+        (
+        `user_name`,
+        `password`
+        )
+        VALUES
+        (
+        #{entity.userName},
+        #{entity.password}
+        )
+    </insert>
+
     <select id="selectByUserName" resultType="com.growing.pains.model.entity.system.UserEntity">
         select
         <include refid="basicFields"/>

@@ -67,6 +67,7 @@ var tagManager = function () {
                         location.href = environment.basePath + "/blogTag/listPage.htm";
                     });
                     modal.modal('show');
+                    setTimeout(function(){modal.modal("hide")}, 5000);
                 }
             });
         },
@@ -116,6 +117,7 @@ var tagManager = function () {
                         location.href = environment.basePath + "/blogTag/listPage.htm";
                     });
                     modal.modal('show');
+                    setTimeout(function(){modal.modal("hide")}, 5000);
                 }
             });
         },
@@ -190,6 +192,7 @@ var tagManager = function () {
                         location.href = environment.basePath + "/blogTag/listPage.htm";
                     });
                     modal.modal('show');
+                    setTimeout(function(){modal.modal("hide")}, 5000);
                 }
             });
         }

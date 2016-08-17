@@ -77,6 +77,7 @@ var blogManager = function () {
                         location.href = environment.basePath + "/blog/listPage.htm";
                     });
                     modal.modal('show');
+                    setTimeout(function(){modal.modal("hide")}, 5000);
                 }
             });
         },
@@ -125,6 +126,7 @@ var blogManager = function () {
                         location.href = environment.basePath + "/blog/listPage.htm";
                     });
                     modal.modal('show');
+                    setTimeout(function(){modal.modal("hide")}, 5000);
                 }
             });
         },
@@ -197,6 +199,7 @@ var blogManager = function () {
                         location.href = environment.basePath + "/blog/listPage.htm";
                     });
                     modal.modal('show');
+                    setTimeout(function(){modal.modal("hide")}, 5000);
                 }
             });
         }

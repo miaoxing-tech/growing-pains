@@ -1,6 +1,3 @@
-/*
- * Copyright (c) 2013 Qunar.com. All Rights Reserved.
- */
 package com.growing.pains.model.enums;
 
 /**

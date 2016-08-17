@@ -17,7 +17,6 @@ function $ajax(ajaxOption) {
             console.error(e);
         }
     };
-    ajaxOption.data.asyn = true;
     var _ajax = $.extend(true, {}, _$ajaxDefaultOption, ajaxOption);
     $.ajax(_ajax);
 }

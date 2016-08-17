@@ -33,6 +33,7 @@
     <!-- END PAGE HEAD -->
     <!-- BEGIN PAGE CONTENT -->
     <div class="page-content">
+        <%@ include file="./../common/modalDialog.jsp" %>
         <div class="container">
             <!-- BEGIN PAGE BREADCRUMB -->
             <ul class="page-breadcrumb breadcrumb">
@@ -43,7 +44,7 @@
             <!-- END PAGE BREADCRUMB -->
             <!-- BEGIN PAGE CONTENT INNER -->
             <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 margin-bottom-10">
                     <a class="dashboard-stat dashboard-stat-light blue-madison" href="javascript:;">
                         <div class="visual">
                             <i class="fa fa-briefcase fa-icon-medium"></i>
@@ -53,12 +54,12 @@
                                 ${blogTotal}
                             </div>
                             <div class="desc">
-                                博客总数
+                                博文总数
                             </div>
                         </div>
                     </a>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <a class="dashboard-stat dashboard-stat-light red-intense" href="javascript:;">
                         <div class="visual">
                             <i class="fa fa-shopping-cart"></i>
@@ -68,22 +69,7 @@
                                 ${lastTime}
                             </div>
                             <div class="desc">
-                                最新更新时间
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                    <a class="dashboard-stat dashboard-stat-light green-haze" href="javascript:;">
-                        <div class="visual">
-                            <i class="fa fa-group fa-icon-medium"></i>
-                        </div>
-                        <div class="details">
-                            <div class="number">
-                                ${userTotal}
-                            </div>
-                            <div class="desc">
-                                用户总数
+                                博文最新时间
                             </div>
                         </div>
                     </a>
@@ -113,7 +99,7 @@
                                 <ul class="nav nav-tabs">
                                     <li class="active">
                                         <a href="#overview_1" data-toggle="tab">
-                                            最新微博 </a>
+                                            最新博文 </a>
                                     </li>
                                 </ul>
                                 <div class="tab-content">

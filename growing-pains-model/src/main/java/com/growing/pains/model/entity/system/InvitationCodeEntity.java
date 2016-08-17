@@ -1,4 +1,4 @@
-package com.growing.pains.model.entity.blog;
+package com.growing.pains.model.entity.system;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -6,12 +6,12 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import java.util.Date;
 
 /**
- * 博客内容实体类
+ * 邀请码实体类
  *
  * @author: miaoxing
- * DATE:    16/7/11
+ * DATE:    16/8/15
  */
-public class BlogContentEntity {
+public class InvitationCodeEntity {
 
     /**
      * 主键
@@ -19,19 +19,14 @@ public class BlogContentEntity {
     private int id;
 
     /**
-     * 博文标题
+     * 邀请码
      */
-    private String title;
+    private String code;
 
     /**
-     * 博文内容
+     * 邀请码状态：1.有效, 0.失效
      */
-    private String content;
-
-    /**
-     * 博客所属用户id
-     */
-    private int userId;
+    private int state;
 
     /**
      * 创建时间
@@ -43,11 +38,6 @@ public class BlogContentEntity {
      */
     private Date updateTime;
 
-    /**
-     * 博客状态：1.有效, 0.失效
-     */
-    private int state;
-
     public int getId() {
         return id;
     }
@@ -56,28 +46,20 @@ public class BlogContentEntity {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getCode() {
+        return code;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getContent() {
-        return content;
+    public int getState() {
+        return state;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setState(int state) {
+        this.state = state;
     }
 
     public Date getCreateTime() {
@@ -94,14 +76,6 @@ public class BlogContentEntity {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public int getState() {
-        return state;
-    }
-
-    public void setState(int state) {
-        this.state = state;
     }
 
     @Override

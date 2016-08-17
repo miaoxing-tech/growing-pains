@@ -8,6 +8,7 @@ import com.google.common.base.Splitter;
  */
 public class ConstantContext {
     public static final Splitter EQUAL_SIGN_SPLITTER = Splitter.on("=").trimResults().omitEmptyStrings();
+    public static final Splitter COMMA_SPLITTER = Splitter.on(",").trimResults().omitEmptyStrings();
 
     public static final String LINE_BREAK = System.lineSeparator();
     public static final String EQUAL_SIGN = "=";
