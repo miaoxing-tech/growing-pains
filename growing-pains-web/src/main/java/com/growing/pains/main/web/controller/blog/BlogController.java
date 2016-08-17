@@ -61,7 +61,7 @@ public class BlogController {
 
     @RequestMapping(value = "updatePage", method = RequestMethod.GET)
     public ModelAndView updatePage(@RequestParam("blogId") int blogId) {
-        BlogContentEntity blog = getBlogById(blogId);
+        BlogContentEntity blog = getBlogById(blogId, SessionContext.getCurrentUser().getId());
         List<BlogContentTagEntity> blogTagList = blogService.queryTagByContentId(blogId);
         List<Integer> blogTagIdList = blogTagList.stream()
                 .map(BlogContentTagEntity::getBlogTagId)
@@ -81,12 +81,12 @@ public class BlogController {
                 .addObject("blogId", blogId);
     }
 
-    private BlogContentEntity getBlogById(int blogId) {
+    private BlogContentEntity getBlogById(int blogId, Integer userId) {
         Preconditions.checkArgument(blogId > 0, "博客id不合法");
 
         BlogParam param = new BlogParam();
         param.setId(blogId);
-        param.setUserId(SessionContext.getCurrentUser().getId());
+        param.setUserId(userId);
         List<BlogContentEntity> entities = blogService.queryByParam(param);
 
         Preconditions.checkArgument(!CollectionUtils.isEmpty(entities), "您没有此id的博客");
@@ -188,7 +188,7 @@ public class BlogController {
     @ResponseBody
     public ApiResult<BlogContentEntity> getSingleBlog(@RequestParam("blogId") int blogId) {
         Preconditions.checkArgument(blogId > 0, "博文id不合法");
-        BlogContentEntity blog = getBlogById(blogId);
+        BlogContentEntity blog = getBlogById(blogId, null);
         Preconditions.checkNotNull(blog, "您查询的博客不存在");
         return ApiResult.succ(blog);
     }
