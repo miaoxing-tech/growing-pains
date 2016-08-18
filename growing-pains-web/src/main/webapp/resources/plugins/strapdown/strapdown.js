@@ -3,10 +3,21 @@
  * Copyright (c) 2011-2013, Christopher Jeffrey. (MIT Licensed)
  * https://github.com/chjj/marked
  */
+var toc;
+var index;
 var operate = {
     initMarkdown: function (markdown) {
+        toc = '';
+        index = 0;
+        var ifToc = false;
+        if (markdown.trim().startWith('{markdown-toc}')) {
+            ifToc = true;
+        }
         // Generate Markdown
-        var html = marked(markdown);
+        var html = marked(markdown, ifToc);
+        if (ifToc) {
+            html = html.replace('{markdown-toc}', marked(toc) + '</br>');
+        }
         document.getElementById('content_markdown').innerHTML = html;
 
         // Prettify
@@ -26,6 +37,11 @@ var operate = {
         }
     }
 };
+String.prototype.startWith = function (str) {
+    if (str == null || str == "" || this.length == 0 || str.length > this.length)
+        return false;
+    return this.substr(0, str.length) == str;
+}
 ;(function () {
     var block = {
         newline: /^\n+/,
@@ -477,16 +493,16 @@ var operate = {
         this.options = options || marked.defaults;
     }
 
-    Parser.parse = function (src, options) {
+    Parser.parse = function (src, ifToc, options) {
         var parser = new Parser(options);
-        return parser.parse(src);
+        return parser.parse(src, ifToc);
     };
-    Parser.prototype.parse = function (src) {
+    Parser.prototype.parse = function (src, ifToc) {
         this.inline = new InlineLexer(src.links, this.options);
         this.tokens = src.reverse();
         var out = '';
         while (this.next()) {
-            out += this.tok();
+            out += this.tok(ifToc);
         }
         return out;
     };
@@ -503,7 +519,7 @@ var operate = {
         }
         return this.inline.output(body);
     };
-    Parser.prototype.tok = function () {
+    Parser.prototype.tok = function (ifToc) {
         switch (this.token.type) {
             case'space':
             {
@@ -515,8 +531,16 @@ var operate = {
             }
             case'heading':
             {
+                if (ifToc) {
+                    index++;
+                    for (var i = 1; i < this.token.depth; i++) {
+                        toc = toc + '  ';
+                    }
+                    toc = toc + '- [' + this.inline.output(this.token.text) + '](#' + this.inline.output(this.token.text) + '$' + index + ')\n';
+                }
                 return '<h'
                     + this.token.depth
+                    + ' id=\'' + this.inline.output(this.token.text) + '$' + index + '\''
                     + '>'
                     + this.inline.output(this.token.text)
                     + '</h'
@@ -663,10 +687,10 @@ var operate = {
         return obj;
     }
 
-    function marked(src, opt) {
+    function marked(src, ifToc, opt) {
         try {
             if (opt)opt = merge({}, marked.defaults, opt);
-            return Parser.parse(Lexer.lex(src, opt), opt);
+            return Parser.parse(Lexer.lex(src, opt), ifToc, opt);
         } catch (e) {
             e.message += '\nPlease report this to https://github.com/chjj/marked.';
             if ((opt || marked.defaults).silent) {
