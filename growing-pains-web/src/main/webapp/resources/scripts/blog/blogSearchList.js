@@ -74,7 +74,7 @@ var TableAjax = function () {
                         var addResult = function (result, data) {
                             var array = [
                                 data.blogContentEntity.title,
-                                getFormatDateByLong(data.blogContentEntity.updateTime, "yyyy-MM-dd hh:mm:ss"),
+                                getFormatDateByLong(data.blogContentEntity.createTime, "yyyy-MM-dd hh:mm:ss"),
                                 data.userName
                             ];
                             result.push(array);
