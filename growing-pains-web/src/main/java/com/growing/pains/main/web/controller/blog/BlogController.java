@@ -131,6 +131,28 @@ public class BlogController {
         return ApiResult.buildPagination(pageInfo.getTotal(), vms);
     }
 
+    @Authority(Auth.PUBLIC)
+    @RequestMapping(value = "searchBlogPage", method = RequestMethod.GET)
+    public ModelAndView searchBlogPage(@RequestParam("title") String title) {
+        return new ModelAndView("blog/searchList")
+                .addObject("title", title);
+    }
+
+    @Authority(Auth.PUBLIC)
+    @RequestMapping(value = "searchBlog", method = RequestMethod.GET)
+    @ResponseBody
+    public ApiResult searchBlog(BlogParam param) {
+        checkPageInfo(param);
+        Preconditions.checkArgument(StringUtils.isNotBlank(param.getTitle()), "博文名称不能为空");
+
+        PageInfo<BlogContentEntity> pageInfo = blogService.queryPageByParam(param);
+        if (pageInfo.getTotal() < 0) {
+            return ApiResult.fail("博文不存在");
+        }
+
+        return ApiResult.buildPagination(pageInfo.getTotal(), addUserNameToContent(pageInfo.getList()));
+    }
+
     @RequestMapping(value = "addBlog", method = RequestMethod.POST)
     @ResponseBody
     public ApiResult addBlog(BlogContentEntity blog,
@@ -216,7 +238,11 @@ public class BlogController {
     @ResponseBody
     public ApiResult<List<BlogVm>> newestBlogList() {
         List<BlogContentEntity> entities = blogService.queryNewestBlogList(NEWEST_LIST_SIZE);
-        List<BlogVm> vms = entities.stream()
+        return ApiResult.succ(addUserNameToContent(entities));
+    }
+
+    private List<BlogVm> addUserNameToContent(List<BlogContentEntity> entities) {
+        return entities.stream()
                 .map(blogContentEntity -> {
                     BlogVm vm = new BlogVm();
                     vm.setBlogContentEntity(blogContentEntity);
@@ -225,6 +251,5 @@ public class BlogController {
                     vm.setUserName(user.getUserName());
                     return vm;
                 }).collect(Collectors.toList());
-        return ApiResult.succ(vms);
     }
 }

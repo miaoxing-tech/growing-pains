@@ -197,9 +197,9 @@
     <div class="page-header-menu">
         <div class="container">
             <!-- BEGIN HEADER SEARCH BOX -->
-            <form class="search-form" action="<c:url value="/"/>" method="GET">
+            <form class="search-form" action="<c:url value="/blog/searchBlogPage.htm"/>" method="GET">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search Blog" name="query">
+                    <input type="text" class="form-control" placeholder="Search Blog" name="title">
 					<span class="input-group-btn">
 					<a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>
 					</span>

@@ -370,7 +370,7 @@
              * sZeroRecords - assuming that is given.
              */
             if (!lang.sEmptyTable && zeroRecords &&
-                defaults.sEmptyTable === "No data available in table") {
+                defaults.sEmptyTable === "对不起，查询不到您想要的数据⊙﹏⊙") {
                 _fnMap(lang, lang, 'sZeroRecords', 'sEmptyTable');
             }
 
@@ -10503,7 +10503,7 @@
 			 *      } );
 			 *    } );
                  */
-                "sEmptyTable": "No data available in table",
+                "sEmptyTable": "对不起，查询不到您想要的数据⊙﹏⊙",
 
 
                 /**
