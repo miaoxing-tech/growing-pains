@@ -143,9 +143,12 @@ public class BlogController {
 
     @RequestMapping(value = "updateBlog", method = RequestMethod.POST)
     @ResponseBody
-    public ApiResult updateBlog(BlogContentEntity blog) {
+    public ApiResult updateBlog(BlogContentEntity blog,
+                                @RequestParam(value = "tagId[]", required = false) List<Integer> tagIds) {
         checkBlogContent(blog);
+        Preconditions.checkArgument(blog.getId() > 0, "博文id不合法");
         blogService.updateBlog(blog);
+        blogService.updateBlogTag(tagIds, blog.getId());
         return ApiResult.succ();
     }
 
@@ -163,15 +166,6 @@ public class BlogController {
     private void checkPageInfo(BlogParam param) {
         Preconditions.checkArgument(param.getPageNum() != null && param.getPageNum() > 0, "页数不合法");
         Preconditions.checkArgument(param.getPageSize() != null && param.getPageSize() > 0, "每页数量不合法");
-    }
-
-    @RequestMapping(value = "updateBlogTag", method = RequestMethod.POST)
-    @ResponseBody
-    public ApiResult updateBlogTag(@RequestParam("tagIds") List<Integer> tagIds,
-                                   @RequestParam("blogContentId") int blogContentId) {
-        Preconditions.checkArgument(blogContentId > 0, "博文id不合法");
-        blogService.updateBlogTag(tagIds, blogContentId);
-        return ApiResult.succ();
     }
 
     @RequestMapping(value = "deleteBlog", method = RequestMethod.POST)
