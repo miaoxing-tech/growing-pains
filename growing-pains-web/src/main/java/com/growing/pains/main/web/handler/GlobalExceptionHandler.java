@@ -39,7 +39,7 @@ public class GlobalExceptionHandler implements HandlerExceptionResolver, Ordered
      *
      * @see org.springframework.web.servlet.config.AnnotationDrivenBeanDefinitionParser
      */
-    private int order = 2;
+    private int order = 1;
 
     /**
      * 处理异常
