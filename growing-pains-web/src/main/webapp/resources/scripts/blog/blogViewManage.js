@@ -25,10 +25,12 @@ var blogViewManager = function () {
                         });
                         return false;
                     }
-                    $("#blog-title").html(data.data.title);
+                    $("#blog-title").html(data.data.blogContentEntity.title);
                     $("#create-time").html('<i class="fa fa-calendar"></i>' +
-                        '<a>' + getFormatDateByLong(data.data.createTime, "yyyy-MM-dd hh:mm:ss") + '</a>');
-                    operate.initMarkdown(data.data.content);
+                        '<a>&nbsp;' + getFormatDateByLong(data.data.blogContentEntity.createTime, "yyyy-MM-dd hh:mm:ss") + '</a>');
+                    $("#author").html('<i class="fa fa-user"></i>' +
+                        '<a>&nbsp;' + data.data.userName + '</a>');
+                    operate.initMarkdown(data.data.blogContentEntity.content);
                     return true;
                 }
             });

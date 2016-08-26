@@ -202,11 +202,11 @@ public class BlogController {
     @Authority(Auth.PUBLIC)
     @RequestMapping(value = "getSingleBlog", method = RequestMethod.GET)
     @ResponseBody
-    public ApiResult<BlogContentEntity> getSingleBlog(@RequestParam("blogId") int blogId) {
+    public ApiResult<BlogVm> getSingleBlog(@RequestParam("blogId") int blogId) {
         Preconditions.checkArgument(blogId > 0, "博文id不合法");
         BlogContentEntity blog = getBlogById(blogId, null);
         Preconditions.checkNotNull(blog, "您查询的博客不存在");
-        return ApiResult.succ(blog);
+        return ApiResult.succ(addUserNameToContent(blog));
     }
 
     @Authority(Auth.PUBLIC)
@@ -243,13 +243,16 @@ public class BlogController {
 
     private List<BlogVm> addUserNameToContent(List<BlogContentEntity> entities) {
         return entities.stream()
-                .map(blogContentEntity -> {
-                    BlogVm vm = new BlogVm();
-                    vm.setBlogContentEntity(blogContentEntity);
-                    UserEntity user = userService.queryUserByUserId(blogContentEntity.getUserId());
-                    Preconditions.checkNotNull(user, "用户不存在");
-                    vm.setUserName(user.getUserName());
-                    return vm;
-                }).collect(Collectors.toList());
+                .map(this::addUserNameToContent)
+                .collect(Collectors.toList());
+    }
+
+    private BlogVm addUserNameToContent(BlogContentEntity entity) {
+        BlogVm vm = new BlogVm();
+        vm.setBlogContentEntity(entity);
+        UserEntity user = userService.queryUserByUserId(entity.getUserId());
+        Preconditions.checkNotNull(user, "博文所属用户不存在");
+        vm.setUserName(user.getUserName());
+        return vm;
     }
 }
