@@ -7,6 +7,10 @@ var toc;
 var index;
 var operate = {
     initMarkdown: function (markdown) {
+        if (typeof(markdown) == "undefined") {
+            return;
+        }
+
         toc = '';
         index = 0;
         var ifToc = false;
