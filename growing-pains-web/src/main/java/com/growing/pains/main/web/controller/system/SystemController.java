@@ -60,7 +60,7 @@ public class SystemController {
     }
 
     @Authority(Auth.PUBLIC)
-    @RequestMapping(value = "authError", method = RequestMethod.GET)
+    @RequestMapping(value = "authError")
     public ModelAndView authError() {
         return new ModelAndView("error/authError");
     }
