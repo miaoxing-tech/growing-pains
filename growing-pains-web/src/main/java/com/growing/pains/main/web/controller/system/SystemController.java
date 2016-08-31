@@ -52,6 +52,7 @@ public class SystemController {
         return ApiResult.succ();
     }
 
+    @Authority(Auth.PUBLIC)
     @RequestMapping(value = "logout", method = RequestMethod.POST)
     @ResponseBody
     public ApiResult logout(HttpServletResponse response) {
