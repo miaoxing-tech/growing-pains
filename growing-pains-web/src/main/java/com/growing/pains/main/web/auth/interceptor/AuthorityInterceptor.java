@@ -19,6 +19,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -74,6 +75,18 @@ public class AuthorityInterceptor implements HandlerInterceptor {
             initSessionInContext(authResult.getUser());
             return true;
         }
+
+        if (request.getRequestURI().contains(".json")) {
+            try {
+                response.getWriter().write("您已失去登录状态, 请重新登录");
+                response.getWriter().flush();
+                response.getWriter().close();
+                return false;
+            } catch (IOException e) {
+                logger.error("返回登录超时信息时错误: {}", e.getMessage(), e);
+            }
+        }
+
         response.sendRedirect("/system/authError.htm");
         return false;
     }
