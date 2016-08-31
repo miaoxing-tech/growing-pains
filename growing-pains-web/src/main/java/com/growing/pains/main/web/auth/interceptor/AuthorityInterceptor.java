@@ -74,7 +74,7 @@ public class AuthorityInterceptor implements HandlerInterceptor {
             initSessionInContext(authResult.getUser());
             return true;
         }
-        request.getRequestDispatcher("/system/authError.htm").forward(request, response);
+        response.sendRedirect("/system/authError.htm");
         return false;
     }
 
