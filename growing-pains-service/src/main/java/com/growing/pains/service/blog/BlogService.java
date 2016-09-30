@@ -75,7 +75,10 @@ public class BlogService {
     @Transactional
     public void updateBlogTag(List<Integer> tagIds, int blogContentId) {
         List<BlogContentTagEntity> entities = queryTagByContentId(blogContentId);
-        blogContentTagDao.delete(entities);
+        if (!CollectionUtils.isEmpty(entities)) {
+            blogContentTagDao.delete(entities);
+        }
+
         if (CollectionUtils.isEmpty(tagIds)) {
             return;
         }
