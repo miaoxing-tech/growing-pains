@@ -108,13 +108,13 @@
                                         <th width="30%">
                                             博客标题
                                         </th>
-                                        <th width="20%">
+                                        <th width="15%">
                                             创建时间
                                         </th>
-                                        <th width="20%">
+                                        <th width="15%">
                                             更新时间
                                         </th>
-                                        <th width="20%">
+                                        <th width="30%">
                                             操作
                                         </th>
                                     </tr>
