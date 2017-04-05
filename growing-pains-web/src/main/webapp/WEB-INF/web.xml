@@ -58,10 +58,10 @@
         <url-pattern>*.json</url-pattern>
     </servlet-mapping>
     <!-- rest请求 -->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>dispatch</servlet-name>-->
-        <!--<url-pattern>/</url-pattern>-->
-    <!--</servlet-mapping>-->
+    <servlet-mapping>
+        <servlet-name>dispatch</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
 
     <error-page>
         <error-code>404</error-code>
