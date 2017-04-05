@@ -23,7 +23,7 @@ public class IndexController {
     private BlogService blogService;
 
     @Authority(Auth.PUBLIC)
-    @RequestMapping(value = {"", "/index"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"", "/index"}, method = {RequestMethod.GET, RequestMethod.HEAD})
     public ModelAndView index() {
         String lastTime;
         BlogContentEntity lastBlog = blogService.getLastBlog();
