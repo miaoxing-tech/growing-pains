@@ -97,10 +97,9 @@
             </div>
             <!-- END PAGE CONTENT INNER -->
         </div>
-        <div id="gitmentContainer"></div>
     </div>
     <!-- END PAGE CONTENT -->
-
+    <div id="gitmentContainer"></div>
 </div>
 <!-- END PAGE CONTAINER -->
 <%@ include file="./../common/preFooter.jsp" %>
