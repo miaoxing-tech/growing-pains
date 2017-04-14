@@ -13,6 +13,10 @@
     <link rel="stylesheet" type="text/css" href="${basePath}/resources/plugins/metronic/css/bootstrap-markdown.min.css">
     <link rel="stylesheet" type="text/css" href="${basePath}/resources/plugins/metronic/css/blog.css">
 
+    <%-- Gitment --%>
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+
     <script src="${basePath}/resources/plugins/metronic/script/markdown.js" type="text/javascript"></script>
     <script src="${basePath}/resources/plugins/metronic/script/bootstrap-markdown.js" type="text/javascript"></script>
     <script src="${basePath}/resources/scripts/blog/blogViewManage.js" type="text/javascript"></script>
@@ -93,8 +97,10 @@
             </div>
             <!-- END PAGE CONTENT INNER -->
         </div>
+        <div id="gitmentContainer"></div>
     </div>
     <!-- END PAGE CONTENT -->
+
 </div>
 <!-- END PAGE CONTAINER -->
 <%@ include file="./../common/preFooter.jsp" %>
@@ -108,6 +114,17 @@
         //初始化页面相应元素绑定事件
         blogViewManager.init(${blogId});
     });
+</script>
+<script>
+    var gitment = new Gitment({
+        owner: 'mx617276959',
+        repo: 'miaoxing.tech',
+        oauth: {
+            client_id: 'd80605ff6c0ef4717f8f',
+            client_secret: 'd888aa2c830e75dc017e91c4a7cd86877a1554a4',
+        },
+    })
+    gitment.render('gitmentContainer')
 </script>
 </body>
 </html>
