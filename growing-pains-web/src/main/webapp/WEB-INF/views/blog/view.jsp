@@ -58,9 +58,9 @@
                         <div class="col-md-12 blog-page">
                             <div class="row">
                                 <div class="col-md-12 article-block">
-                                    <br />
+                                    <br/>
                                     <h1 style="margin-top:0;text-align:center;" id="blog-title"></h1>
-                                    <br />
+                                    <br/>
                                     <div class="blog-tag-data">
                                         <div class="row">
                                             <div class="col-md-6">
@@ -90,6 +90,7 @@
                                         ##### 正文。
                                     </xmp>
                                 </div>
+                                <div id="gitmentContainer"></div>
                             </div>
                         </div>
                     </div>
@@ -99,7 +100,6 @@
         </div>
     </div>
     <!-- END PAGE CONTENT -->
-    <div id="gitmentContainer"></div>
 </div>
 <!-- END PAGE CONTAINER -->
 <%@ include file="./../common/preFooter.jsp" %>
