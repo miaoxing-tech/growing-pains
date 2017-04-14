@@ -89,8 +89,9 @@
                                     <xmp theme="united" style="display:none;">
                                         ##### 正文。
                                     </xmp>
+                                    <div class="分割线"style="width:1000px;margin:0 auto;padding:0 200px; border-top:1px solid #ddd" ></div>
+                                    <div id="gitmentContainer"></div>
                                 </div>
-                                <div id="gitmentContainer"></div>
                             </div>
                         </div>
                     </div>
