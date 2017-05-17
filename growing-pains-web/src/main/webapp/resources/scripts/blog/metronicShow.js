@@ -70,11 +70,6 @@ var metronicShowManager = function () {
                     html += '<i class="fa fa-calendar"></i>';
                     html += getFormatDateByLong(obj.blogContentEntity.createTime, "yyyy-MM-dd hh:mm:ss");
                     html += '</li>';
-                    html += '<li>';
-                    html += '&nbsp;&nbsp;&nbsp;';
-                    html += '<i class="fa fa-comments"></i>';
-                    html += '<a>评论, 敬请期待^_^</a>';
-                    html += '</li>';
                     html += '</ul>';
                     html += '</div>';
                     html += '</div>';

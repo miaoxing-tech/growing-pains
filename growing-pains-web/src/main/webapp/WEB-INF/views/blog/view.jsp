@@ -76,11 +76,6 @@
                                                     &nbsp;&nbsp;
                                                     <li id="create-time">
                                                     </li>
-                                                    &nbsp;&nbsp;
-                                                    <li>
-                                                        <i class="fa fa-comments"></i>
-                                                        <a>评论, 敬请期待^_^</a>
-                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
