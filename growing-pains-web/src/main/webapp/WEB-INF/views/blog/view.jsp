@@ -112,7 +112,7 @@
 </script>
 <script>
     var gitment = new Gitment({
-        owner: 'mx617276959',
+        owner: 'miaoxing-tech',
         repo: 'miaoxing.tech',
         oauth: {
             client_id: 'd80605ff6c0ef4717f8f',
